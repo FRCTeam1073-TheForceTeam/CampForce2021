@@ -2,4 +2,7 @@
 Repository to host CampForce 2021 projects
 
 SumerCamp2021 is the project for VSCode Simple robot.
-src/main/java/frc/robot/Robot.java
+
+src/main/java/frc/robot/Robot.java is the only file that they need to modify
+
+To deploy the run from the WPILib menu 'Simulate Robot Code on Desktop'

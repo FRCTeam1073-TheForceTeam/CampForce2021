@@ -53,14 +53,19 @@ public class Robot extends EducationalRobot {
     m_diffDrive.arcadeDrive(0.0, 0.0);
 
     while (m_ds.isEnabled()){
-      // m_diffDrive.arcadeDrive(-m_controller.getRawAxis(3), m_controller.getRawAxis(2));
-      m_diffDrive.tankDrive(-m_controller.getRawAxis(1), m_controller.getRawAxis(3));
+      
+      //drive code 
+      m_diffDrive.arcadeDrive(-m_controller.getRawAxis(1), m_controller.getRawAxis(0));
+      //m_diffDrive.tankDrive(-m_controller.getRawAxis(1), -m_controller.getRawAxis(3));
+      
+      
+      //servo code
       if(m_controller.getXButton()==true){
-        m_servo.set(0.5);
+        m_servo.setAngle(75);
         System.out.println("0.5");
       }
       if(m_controller.getYButton()==true){
-        m_servo.set(0);
+        m_servo.setAngle(0);
         System.out.println("0");
       }
       }
@@ -68,4 +73,4 @@ public class Robot extends EducationalRobot {
     }
 
   }
-}
+

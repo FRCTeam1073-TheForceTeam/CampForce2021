@@ -24,6 +24,7 @@ public class Robot extends EducationalRobot {
 
   // Assumes a gamepad plugged into channnel 0
   private final XboxController m_controller = new XboxController(0);
+  //make sure to check ID with the romi webpage
   private final Servo m_servo = new Servo(5);
  
 
@@ -55,19 +56,20 @@ public class Robot extends EducationalRobot {
     while (m_ds.isEnabled()){
       
       //drive code 
-      m_diffDrive.arcadeDrive(-m_controller.getRawAxis(1), m_controller.getRawAxis(0));
+      m_diffDrive.arcadeDrive(m_controller.getRawAxis(1), m_controller.getRawAxis(0), true);
       //m_diffDrive.tankDrive(-m_controller.getRawAxis(1), -m_controller.getRawAxis(3));
       
       
       //servo code
       if(m_controller.getXButton()==true){
-        m_servo.setAngle(75);
+        m_servo.set(0.5);
         System.out.println("0.5");
       }
       if(m_controller.getYButton()==true){
-        m_servo.setAngle(0);
+        m_servo.set(0.0);
         System.out.println("0");
       }
+      
       }
       
     }

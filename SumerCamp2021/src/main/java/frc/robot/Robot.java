@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Servo;
 
@@ -25,7 +26,8 @@ public class Robot extends EducationalRobot {
   // Assumes a gamepad plugged into channnel 0
   private final XboxController m_controller = new XboxController(0);
   //make sure to check ID with the romi webpage
-  private final Servo m_servo = new Servo(5);
+  private final Servo m_servo = new Servo(3);
+  DigitalInput dist = new DigitalInput(1);
  
 
  // Set up the differential drive controller
@@ -38,26 +40,29 @@ public class Robot extends EducationalRobot {
   @Override
   public void robotInit() {
     m_diffDrive.setSafetyEnabled(false);
-    m_diffDrive.setRightSideInverted(true);
+    m_diffDrive.setRightSideInverted(false);
   }
 
   /** This function is run when the robot is enabled. */
   @Override
   public void run() {
     
-      //System.out.print(m_leftMotor.getSpeed() + " ");
-   
-    m_diffDrive.arcadeDrive(1.0, 0.0);
-    Timer.delay(0.5);
-    m_diffDrive.arcadeDrive(0.0, 0.4);
-    Timer.delay(0.25);
-    m_diffDrive.arcadeDrive(0.0, 0.0);
+   if(m_ds.isAutonomous()){
+    m_diffDrive.tankDrive(0.5, 0.5);
+    Timer.delay(1);
+    m_diffDrive.tankDrive(0, 0);
 
-    while (m_ds.isEnabled()){
+    m_servo.set(0.5);
+    Timer.delay(1);
+    m_servo.set(0.5);
+   }
+  
+
+    while (m_ds.isOperatorControl()){
       
       //drive code 
-      m_diffDrive.arcadeDrive(m_controller.getRawAxis(1), m_controller.getRawAxis(0), true);
-      //m_diffDrive.tankDrive(-m_controller.getRawAxis(1), -m_controller.getRawAxis(3));
+      //m_diffDrive.arcadeDrive(m_controller.getRawAxis(1), m_controller.getRawAxis(4), true);
+      m_diffDrive.tankDrive(m_controller.getRawAxis(1), m_controller.getRawAxis(2), false);
       
       
       //servo code
@@ -65,6 +70,7 @@ public class Robot extends EducationalRobot {
         m_servo.set(0.5);
         System.out.println("0.5");
       }
+
       if(m_controller.getYButton()==true){
         m_servo.set(0.0);
         System.out.println("0");

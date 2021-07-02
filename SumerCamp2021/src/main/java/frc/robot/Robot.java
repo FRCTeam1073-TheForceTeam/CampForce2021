@@ -55,6 +55,12 @@ public class Robot extends EducationalRobot {
     m_servo.set(0.5);
     Timer.delay(1);
     m_servo.set(0.5);
+
+    while(dist.get() >= 5){
+      m_diffDrive.tankDrive(0.5, 0.5);
+    }
+      m_diffDrive.tankDrive(0, 0);
+ 
    }
   
 

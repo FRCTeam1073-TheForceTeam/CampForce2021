@@ -87,7 +87,8 @@ public class Robot extends EducationalRobot {
    While-loops in Java
    The while loop is a logic structure that runs the code with in it again and again until the condition is not true.
    For example, in english, the code below could be written as
-   while Autonomus mode is enabled, print out the distance reading every 0.25 seconds
+   while Autonomus mode is enabled, print out the distance reading every 0.25 seconds.
+   try uncommenting the print statement below to test this out!
    */
    while(m_ds.isAutonomousEnabled()){
      

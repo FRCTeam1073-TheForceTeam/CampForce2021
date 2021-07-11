@@ -50,20 +50,56 @@ public class Robot extends EducationalRobot {
   /** This function is run when the robot is enabled. */
   @Override
   public void run() {
-    
-   if(m_ds.isAutonomousEnabled()){
-    
+    //preforms action once during auto
+   
+   /*
+   Comments in Java
+   Comments are not compiled and run, like the rest of a Java program. 
+   They are useful to describe what a certain section of code is doing in a program, 
+   so other developers reading your code will have a better idea of what is going on.
+
+   They can also be used to temporarily remove code for debugging purposes
+
+    Multi line comments are done like this
+   */
+    //single line comments are done like this
+
+
+
+    /*
+    If-statements in Java
+    If statements are logic statements in Java that only run the code within them if a condition is met
+    For example, in english, the code below could be written as
+    if Autonomus mode is enabled, set the robot speed to 0.5
+    */
+    if(m_ds.isAutonomousEnabled()){
+    /*
+     When you want to print text to the console, use System.out.println("whatever is inside needs to be in quotes!");
+     This can be helpful for debugging!
+     Try uncommenting the line of code below to test this out!
+     */
+      //System.out.println("Auto If Statement");
+      m_diffDrive.tankDrive(0.5, 0.5);
     
  
    }
+   /*
+   While-loops in Java
+   The while loop is a logic structure that runs the code with in it again and again until the condition is not true.
+   For example, in english, the code below could be written as
+   while Autonomus mode is enabled, print out the distance reading every 0.25 seconds.
+   try uncommenting the print statement below to test this out!
+   */
    while(m_ds.isAutonomousEnabled()){
+     
+    //System.out.println("While Loop");
     System.out.println(Robot.voltageToDist(dist.getAverageVoltage()));
     Timer.delay(0.25);
    }
-
+    //repeats action while teleoperated mode is enabled
     while (m_ds.isOperatorControlEnabled()){
       
-      //drive code 
+      //basic drive code
       //m_diffDrive.arcadeDrive(m_controller.getRawAxis(1), m_controller.getRawAxis(4), true);
       m_diffDrive.tankDrive(m_controller.getRawAxis(1), m_controller.getRawAxis(3), false);
       

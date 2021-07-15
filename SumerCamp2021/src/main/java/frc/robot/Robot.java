@@ -44,7 +44,16 @@ public class Robot extends EducationalRobot {
   @Override
   public void robotInit() {
     m_diffDrive.setSafetyEnabled(false);
-    m_diffDrive.setRightSideInverted(false);
+    m_diffDrive.setRightSideInverted(true);
+  }
+
+  // Ranging Rover Autocommands
+
+  public void rrAutoOne(){
+    while(Robot.voltageToDist(dist.getAverageVoltage()) >= 5){
+      m_diffDrive.tankDrive(.5, .5);
+    }
+    m_diffDrive.tankDrive(0, 0);
   }
 
   /** This function is run when the robot is enabled. */
@@ -53,7 +62,17 @@ public class Robot extends EducationalRobot {
     
    if(m_ds.isAutonomousEnabled()){
     
+    m_diffDrive.tankDrive(0, 0);
+    while(Robot.voltageToDist(dist.getAverageVoltage()) >= 5.9){
+      m_diffDrive.tankDrive(0.5, 0.5);
+    }
+    m_diffDrive.tankDrive(0, 0);
+    m_servo.set(0.25);
+    /*m_servo.set(0.5);
+    Timer.delay(1);
+    m_servo.set(0.5);*/
     
+  
  
    }
    while(m_ds.isAutonomousEnabled()){
@@ -71,10 +90,12 @@ public class Robot extends EducationalRobot {
       //servo code
       if(m_controller.getXButton()==true){
         m_servo.set(0.5);
+        System.out.println("0.5");
       }
 
       if(m_controller.getYButton()==true){
         m_servo.set(0.0);
+        System.out.println("0");
       }
       
       }
